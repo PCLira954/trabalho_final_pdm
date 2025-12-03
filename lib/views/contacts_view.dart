@@ -16,7 +16,7 @@ class _ContactsViewState extends State<ContactsView> {
   Widget build(BuildContext context) {
     final ctrl = Provider.of<ContactController>(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Contatos')),
+      appBar: AppBar(title: Text('Postos de Gasolina')),
       body: ListView.builder(
         itemCount: ctrl.contacts.length,
         itemBuilder: (_, i) {

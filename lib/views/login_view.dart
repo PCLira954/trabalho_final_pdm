@@ -18,7 +18,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     final auth = Provider.of<AuthController>(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Login - IFPI')),
+      appBar: AppBar(title: Text('Login - Gasolina Fácil')),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(

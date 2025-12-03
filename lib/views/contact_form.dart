@@ -30,7 +30,7 @@ class _ContactFormState extends State<ContactForm> {
   Widget build(BuildContext context) {
     final ctrl = Provider.of<ContactController>(context);
     return Scaffold(
-      appBar: AppBar(title: Text(widget.contact == null ? 'Novo contato' : 'Editar contato')),
+      appBar: AppBar(title: Text(widget.contact == null ? 'Novo Posto' : 'Editar Posto')),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(children: [

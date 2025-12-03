@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ContactController()),
       ],
       child: MaterialApp(
-        title: 'IFPI Contacts',
+        title: 'Gasolina Fácil',
         theme: ThemeData(primarySwatch: Colors.indigo),
         home: LoginView(),
       ),
