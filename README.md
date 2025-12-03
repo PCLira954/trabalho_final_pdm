@@ -42,7 +42,6 @@ uuid — geração de IDs únicos para postos
 
 flutter_secure_storage — (caso use autenticação com armazenamento seguro)
 
-📁 Estrutura de Pastas / Principais Arquivos
 /lib
   /models
     contact.dart
@@ -60,3 +59,4 @@ flutter_secure_storage — (caso use autenticação com armazenamento seguro)
     map_view.dart      ← tela de mapa que exibe a localização e marcadores
 main.dart             ← ponto de entrada do app
 pubspec.yaml          ← dependências do projeto
+
