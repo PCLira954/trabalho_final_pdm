@@ -16,6 +16,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyB0EWbMqSOJzufWYeKbQT7SJatmUcYoiSo" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+    
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -10,9 +10,10 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  late GoogleMapController _mapController;
-  LatLng _initial = LatLng(-5.091944, -42.803889); // default (Teresina)
+  GoogleMapController? _mapController;
+  LatLng _initial = LatLng(-5.091944, -42.803889); // Teresina
   Set<Marker> _markers = {};
+  bool _loadingLocation = true;
 
   @override
   void initState() {
@@ -22,37 +23,81 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<void> _determinePosition() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      setState(() => _loadingLocation = false);
+      return;
+    }
+
     LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.deniedForever) return;
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+    if (permission == LocationPermission.deniedForever) {
+      setState(() => _loadingLocation = false);
+      return;
+    }
+
     final pos = await Geolocator.getCurrentPosition();
-    setState(() => _initial = LatLng(pos.latitude, pos.longitude));
+
+    if (!mounted) return;
+
+    setState(() {
+      _initial = LatLng(pos.latitude, pos.longitude);
+      _loadingLocation = false;
+    });
+
+    _animateToPosition(_initial);
+  }
+
+  void _animateToPosition(LatLng pos) {
+    _mapController?.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: pos, zoom: 16),
+      ),
+    );
   }
 
   void _loadContacts() {
     final ctrl = Provider.of<ContactController>(context, listen: false);
+
     ctrl.loadAll().then((_) {
+      if (!mounted) return;
+
       setState(() {
-        _markers = ctrl.contacts.where((c) => c.latitude != null && c.longitude != null).map((c) => Marker(
-          markerId: MarkerId(c.id),
-          position: LatLng(c.latitude!, c.longitude!),
-          infoWindow: InfoWindow(title: c.name, snippet: c.phone, onTap: () {
-            
-          }),
-        )).toSet();
+        _markers = ctrl.contacts
+            .where((c) => c.latitude != null && c.longitude != null)
+            .map((c) => Marker(
+                  markerId: MarkerId(c.id),
+                  position: LatLng(c.latitude!, c.longitude!),
+                  infoWindow:
+                      InfoWindow(title: c.name, snippet: c.phone),
+                ))
+            .toSet();
       });
     });
+  }
+
+  Future<void> _goToMyLocation() async {
+    final pos = await Geolocator.getCurrentPosition();
+    _animateToPosition(LatLng(pos.latitude, pos.longitude));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Mapas')),
+      appBar: AppBar(title: Text('Mapa')),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(target: _initial, zoom: 14),
         myLocationEnabled: true,
+        myLocationButtonEnabled: false, // botão padrão desativado
         markers: _markers,
         onMapCreated: (c) => _mapController = c,
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: _goToMyLocation,
+        child: Icon(Icons.my_location),
       ),
     );
   }
