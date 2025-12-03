@@ -23,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            // Replace with IFPI logo asset
+            
             FlutterLogo(size: 100),
             SizedBox(height: 16),
             TextField(

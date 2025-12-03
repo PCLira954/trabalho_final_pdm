@@ -90,7 +90,7 @@ class _MapViewState extends State<MapView> {
       body: GoogleMap(
         initialCameraPosition: CameraPosition(target: _initial, zoom: 14),
         myLocationEnabled: true,
-        myLocationButtonEnabled: false, // botão padrão desativado
+        myLocationButtonEnabled: false, 
         markers: _markers,
         onMapCreated: (c) => _mapController = c,
       ),

@@ -1,10 +1,6 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
-
 part of 'contact_hive.dart';
 
-// **************************************************************************
-// TypeAdapterGenerator
-// **************************************************************************
+
 
 class ContactHiveAdapter extends TypeAdapter<ContactHive> {
   @override

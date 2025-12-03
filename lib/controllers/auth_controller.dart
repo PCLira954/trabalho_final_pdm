@@ -9,7 +9,7 @@ class AuthController extends ChangeNotifier {
   User? _user;
   User? get user => _user;
 
-  // Registrar um novo usuário
+  
   Future<bool> register(String email, String password) async {
     final id = Uuid().v4();
     
@@ -23,7 +23,7 @@ class AuthController extends ChangeNotifier {
     return true;
   }
 
-  // Login
+  
   Future<bool> login(String email, String password) async {
     final usersBox = DBService().usersBox;
     final data = usersBox.get(email);
@@ -41,14 +41,14 @@ class AuthController extends ChangeNotifier {
     return false;
   }
 
-  // Sair da conta
+  
   Future<void> logout() async {
     _user = null;
     await _storage.delete(key: 'user_email');
     notifyListeners();
   }
 
-  // Recuperação de senha (simples)
+  
   Future<bool> recoverPassword(String email) async {
     final usersBox = DBService().usersBox;
     return usersBox.containsKey(email);

@@ -1,6 +1,5 @@
-// lib/models/contact_hive.dart
 import 'package:hive/hive.dart';
-part 'contact_hive.g.dart'; // <- arquivo gerado automaticamente
+part 'contact_hive.g.dart';
 
 @HiveType(typeId: 1)
 class ContactHive extends HiveObject {

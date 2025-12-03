@@ -1,4 +1,3 @@
-// lib/views/contact_form.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:geolocator/geolocator.dart';
@@ -47,7 +46,7 @@ class _ContactFormState extends State<ContactForm> {
     super.dispose();
   }
 
-  /// Opcional: usa a localização atual para preencher latitude/longitude.
+  
   Future<void> _useCurrentLocation() async {
     setState(() => _gettingLocation = true);
 
@@ -83,11 +82,11 @@ class _ContactFormState extends State<ContactForm> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
-  /// Tenta converter o texto digitado em double; retorna null se vazio.
+  
   double? _parseCoordinate(String s) {
     final t = s.trim();
     if (t.isEmpty) return null;
-    // Troca vírgula por ponto para usuários que digitam assim
+    
     final normalized = t.replaceAll(',', '.');
     return double.tryParse(normalized);
   }
@@ -98,8 +97,8 @@ class _ContactFormState extends State<ContactForm> {
     final lat = _parseCoordinate(_latitude.text);
     final lng = _parseCoordinate(_longitude.text);
 
-    // Se o usuário digitou algo que não é número, _parseCoordinate retornará null
-    // e a validação do form deve impedir salvar — mas reforçamos aqui:
+    
+    
     if ((_latitude.text.trim().isNotEmpty && lat == null) ||
         (_longitude.text.trim().isNotEmpty && lng == null)) {
       _showMessage('Latitude ou longitude inválida. Use formato numérico (ex: -5.08921).');
@@ -142,21 +141,21 @@ class _ContactFormState extends State<ContactForm> {
           key: _formKey,
           child: Column(
             children: [
-              // Nome
+              
               TextFormField(
                 controller: _name,
                 decoration: InputDecoration(labelText: 'Nome do Posto'),
                 validator: (v) => (v == null || v.trim().isEmpty) ? 'Informe o nome' : null,
               ),
 
-              // Telefone
+              
               TextFormField(
                 controller: _phone,
                 decoration: InputDecoration(labelText: 'Telefone'),
                 keyboardType: TextInputType.phone,
               ),
 
-              // Email (opcional)
+              
               TextFormField(
                 controller: _email,
                 decoration: InputDecoration(labelText: 'Email (opcional)'),
@@ -165,7 +164,7 @@ class _ContactFormState extends State<ContactForm> {
 
               const SizedBox(height: 12),
 
-              // Linha com latitude / longitude (manual)
+              
               Row(
                 children: [
                   Expanded(
@@ -178,7 +177,7 @@ class _ContactFormState extends State<ContactForm> {
                       ),
                       keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                       validator: (v) {
-                        if (v == null || v.trim().isEmpty) return null; // opcional
+                        if (v == null || v.trim().isEmpty) return null; 
                         final val = _parseCoordinate(v);
                         return val == null ? 'Latitude inválida' : null;
                       },
@@ -195,7 +194,7 @@ class _ContactFormState extends State<ContactForm> {
                       ),
                       keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                       validator: (v) {
-                        if (v == null || v.trim().isEmpty) return null; // opcional
+                        if (v == null || v.trim().isEmpty) return null; 
                         final val = _parseCoordinate(v);
                         return val == null ? 'Longitude inválida' : null;
                       },
@@ -206,7 +205,7 @@ class _ContactFormState extends State<ContactForm> {
 
               const SizedBox(height: 10),
 
-              // Botão opcional para preencher automaticamente (mantemos porque é útil)
+              
               Row(
                 children: [
                   ElevatedButton.icon(
