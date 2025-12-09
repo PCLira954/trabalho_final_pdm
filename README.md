@@ -3,6 +3,8 @@ Gasolina Fácil — App Flutter para cadastro de postos de gasolina e visualiza�
 
 📄 Descrição
 
+Slides da Apresentação : https://drive.google.com/file/d/1kWuyJ8wo8QjDOgsGqhkDPgxsaftkNdhR/view?usp=sharing
+
 Projeto de disciplina que permite cadastrar "postos de gasolina" com nome, telefone, email (opcional), latitude e longitude — manualmente ou pela localização atual do dispositivo.
 No mapa, o app exibe marcadores para cada posto cadastrado, além de permitir ver a localização atual do usuário.
 
@@ -59,4 +61,3 @@ flutter_secure_storage — (caso use autenticação com armazenamento seguro)
     map_view.dart      ← tela de mapa que exibe a localização e marcadores
 main.dart             ← ponto de entrada do app
 pubspec.yaml          ← dependências do projeto
-
